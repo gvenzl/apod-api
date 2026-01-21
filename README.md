@@ -3,15 +3,8 @@
 A microservice written in Python with the [Flask micro framework](http://flask.pocoo.org).
 
 ## NOTES: 
-### Code re-organization has occurred [2020-05-04]!
-Code was reorganized to make it work more easily on AWS's Elastic Beanstalk service.
-
-The changes over previous version were :
-1. Moved main code out of the APOD folder and into the top level directory as Elastic Beanstalk had a hard time finding the initial python file unless it was in the top-level folder. 
-2. Changed service.py to application.py
-3. Changed references to app in application.py to application
-
-You can find a frozen version of the previous code in the branch called <a href="https://github.com/nasa/apod-api/tree/prevCodeOrganization">"prevCodeOrganization"</a>
+#### Code "refresh" has occured 1-21-2026!
+Code was refreshed to use uv for dependency management. Dockerfile and docker-compose.yml were updated to support containerized deployment.
 
 #### API Reliability
 A very large number of people use the instance of this API that NASA has set up. If you need a extremely reliable version of this API, you likely want to stand up your own version of the API. You can do that with this code! All information that this API returns is actually just grabbed from the <a href='https://apod.nasa.gov/apod/astropix.html'>Astronomy Photo of the Day Website</a> (APOD).
@@ -293,9 +286,8 @@ response = apod_object_parser.get_data(<your_api_key>)
 **for full docs and more functions visit the readme of  the apod parser by clicking <a href="apod_parser/apod_parser_readme.md">here</a>**
 
 ## Deployed <a name="Deployed"></a>
-The deployed version of this API is based on the `eb` branch. The version that was deployed before that is in the `eb_previous` branch. The `master` branch is used as development as that's where most of the pull requests will come into anyways.
 
-This API is deployed on AWS using elastic beanstalk due to large number of people who use the service. However, if you're planning on using it just yourself, it is small enough to be stood up on a single micro EC2 or any other small size cloud compute machine.
+This API is deployed on AWS. However, if you're planning on using it just yourself, it is small enough to be stood up on a single micro EC2 or any other small size cloud compute machine.
 
 ## Feedback <a name="feedback"></a>
 
