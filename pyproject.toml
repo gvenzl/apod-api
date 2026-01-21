@@ -22,3 +22,12 @@ dev = [
     "pytest-cov>=7.0.0",
     "ruff>=0.14.13",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "--cov=apod --cov-report=term-missing"
+pythonpath = ["."]
+
+[tool.ruff.lint]
+select = ["I"]

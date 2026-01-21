@@ -15,3 +15,5 @@ apod/__pycache__/
 Archive.zip
 venv/
 .venv/
+__pycache__
+.pytest_cache/
