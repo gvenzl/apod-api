@@ -17,6 +17,7 @@ No one watching this repository has anything to do with Astronomy Photo of the D
 1. [Getting Started](#getting_started)
     1. [Standard environment](#standard_env)
     2. [Docker environment](#docker)
+    3. [Running Tests](#tests)
 2. [Docs](#docs)
 3. [APOD parser](#TheAPODParser)
 4. [Deployed](#Deployed)
@@ -63,6 +64,18 @@ docker compose up --build
 
 
 &nbsp;
+
+
+
+
+
+### Running Tests <a name="tests"></a>
+1. Make sure you have followed the steps in the [Standard environment](#standard_env) section above.
+2. Run the tests with `pytest`
+```bash
+uv run pytest
+```
+
 ## Docs <a name="docs"></a>
 
 ### Endpoint: `/<version>/apod`
@@ -297,7 +310,7 @@ feedback on this repo.
 ## Author <a name="author"></a>
 - Brian Thomas (based on code by Dan Hammer) 
 - Justin Gosses (made changes to allow this repository to run more easily on AWS Elastic Beanstalk after heroku instance was shut-down)
-- Daniel Rendon
+- Daniel Rendon (made changes to use uv for dependency management and added docker support)
 - Please checkout the <a href="https://github.com/nasa/apod-api/graphs/contributors">contributers</a> to this repository on the righthand side of this page. 
 
 ## Contributing
