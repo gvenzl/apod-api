@@ -362,6 +362,7 @@ feedback on this repo.
 ## Author <a name="author"></a>
 - Brian Thomas (based on code by Dan Hammer) 
 - Justin Gosses (made changes to allow this repository to run more easily on AWS Elastic Beanstalk after heroku instance was shut-down)
+- Daniel Rendon
 - Please checkout the <a href="https://github.com/nasa/apod-api/graphs/contributors">contributers</a> to this repository on the righthand side of this page. 
 
 ## Contributing
