@@ -14,3 +14,4 @@ apod/__pycache__/
 *.zip*
 Archive.zip
 venv/
+.venv/
