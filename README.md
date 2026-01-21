@@ -23,8 +23,7 @@ No one watching this repository has anything to do with Astronomy Photo of the D
 # Table of contents
 1. [Getting Started](#getting_started)
     1. [Standard environment](#standard_env)
-    2. [`virtualenv` environment](#virtualenv)
-    3. [`conda` environment](#conda)
+    2. [Docker environment](#docker)
 2. [Docs](#docs)
 3. [APOD parser](#TheAPODParser)
 4. [Deployed](#Deployed)
@@ -44,70 +43,17 @@ git clone https://github.com/nasa/apod-api
 ```bash
 cd apod-api
 ```
-3. Install dependencies into the project's `lib`
+3. Install dependencies
 ```bash
-pip install -r requirements.txt -t lib
+uv sync
 ```
-4. Add `lib` to your PYTHONPATH and run the server
+4. Run the application
 ```bash
-PYTHONPATH=./lib python application.py
-```
-&nbsp;
-### `virtualenv` environment <a name="virtualenv"></a>
-
-1. Clone the repo
-```bash
-git clone https://github.com/nasa/apod-api
-```
-2. `cd` into the new directory
-```bash
-cd apod-api
-```
-3. Create a new virtual environment `env` in the directory
-```bash
-python -m venv venv
-```
-4. Activate the new environment
-```bash
-.\venv\Scripts\Activate
-```
-5. Install dependencies in new environment
-```bash
-pip install -r requirements.txt
-```
-6. Run the server locally
-```bash
-python application.py
+uv run python application.py
 ```
 &nbsp;
-### `conda` environment <a name="conda"></a>
 
-1. Clone the repo
-```bash
-git clone https://github.com/nasa/apod-api
-```
-2. `cd` into the new directory
-```bash
-cd apod-api
-```
-3. Create a new virtual environment `env` in the directory
-```bash
-conda create --prefix ./env
-```
-4. Activate the new environment
-```bash
-conda activate ./env
-```
-5. Install dependencies in new environment
-```bash
-pip install -r requirements.txt
-```
-6. Run the server locally
-```bash
-python application.py
-```
-
-### Run it in Docker
+### Run it in Docker <a name="docker"></a>
 
 1. Clone the repo
 ```bash
@@ -117,14 +63,11 @@ git clone https://github.com/nasa/apod-api.git
 ```bash
 cd apod-api
 ```
-3. Build the image
+3. Build and run the image
 ```bash
-docker build . -t apod-api
+docker compose up --build
 ```
-4. Run the image
-```bash
-docker run -p 5000:5000 apod-api
-```
+
 
 &nbsp;
 ## Docs <a name="docs"></a>
