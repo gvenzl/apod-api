@@ -217,10 +217,12 @@ def _copyright(soup):
 
                     if stuff:
                         copyright_text = stuff.strip(" ")
-        try:
-            copyright_text = copyright_text.encode("latin1").decode("cp1252")
-        except Exception as ex:
-            LOG.error(str(ex))
+
+        if copyright_text:
+            try:
+                copyright_text = copyright_text.encode("latin1").decode("cp1252")
+            except Exception as ex:
+                LOG.error(str(ex))
 
         return copyright_text
 
