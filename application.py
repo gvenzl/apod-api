@@ -186,6 +186,9 @@ def _get_json_for_date(input_date, use_concept_tags, thumbs):
             code=404, msg=f"No data available for date: {input_date}", usage=False
         )
 
+    if not isinstance(data, dict):
+        return data
+
     data["service_version"] = SERVICE_VERSION
 
     # Volatile caching dict
@@ -231,6 +234,9 @@ def _get_json_for_random_dates(count, use_concept_tags, thumbs):
 
         # Handle case where no data is available
         if not data:
+            continue
+
+        if not isinstance(data, dict):
             continue
 
         data["service_version"] = SERVICE_VERSION
@@ -282,6 +288,10 @@ def _get_json_for_date_range(start_date, end_date, use_concept_tags, thumbs):
 
         # Handle case where no data is available
         if not data:
+            start_ordinal += 1
+            continue
+
+        if not isinstance(data, dict):
             start_ordinal += 1
             continue
 
