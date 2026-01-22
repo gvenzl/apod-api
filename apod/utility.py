@@ -33,7 +33,7 @@ def _get_thumbs(data):
     if "youtube" in data or "youtu.be" in data:
         # get ID from YouTube URL
         youtube_id_regex = re.compile(
-            "(?:(?<=(v|V)/)|(?<=be/)|(?<=(\?|\&)v=)|(?<=embed/))([\w-]+)"
+            r"(?:(?<=(v|V)/)|(?<=be/)|(?<=(\?|\&)v=)|(?<=embed/))([\w-]+)"
         )
         video_id = youtube_id_regex.findall(data)
         video_id = (
@@ -45,7 +45,7 @@ def _get_thumbs(data):
         video_thumb = "https://img.youtube.com/vi/" + video_id + "/0.jpg"
     elif "vimeo" in data:
         # get ID from Vimeo URL
-        vimeo_id_regex = re.compile("(?:/video/)(\d+)")
+        vimeo_id_regex = re.compile(r"(?:/video/)(\d+)")
         vimeo_id = vimeo_id_regex.findall(data)[0]
         # make an API call to get thumbnail URL
         vimeo_request = http.request(
@@ -93,13 +93,13 @@ def _get_apod_chars(dt, thumbs):
     hd_data = None
     if soup.img:
         # it is an image, so get both the low- and high-resolution data
-        data = BASE + soup.img["src"]
+        data = BASE + str(soup.img["src"])
         hd_data = data
 
         LOG.debug("getting the link for hd_data")
         for link in soup.find_all("a", href=True):
-            if link["href"] and link["href"].startswith("image"):
-                hd_data = BASE + link["href"]
+            if link["href"] and str(link["href"]).startswith("image"):
+                hd_data = BASE + str(link["href"])
                 break
     elif soup.iframe:
         # its a video

@@ -89,6 +89,9 @@ class TestApod(unittest.TestCase):
         # make the call
         values = utility.parse_apod(data["datetime"])
 
+        if not isinstance(values, dict):
+            self.fail("API call did not return a dictionary")
+
         # Test returned properties
         for prop in values.keys():
             if prop == "copyright":
