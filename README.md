@@ -4,7 +4,7 @@ A microservice written in Python with the [Flask micro framework](http://flask.p
 
 ## NOTES: 
 #### Code "refresh" has occured 1-21-2026!
-Code was refreshed to use uv for dependency management. Dockerfile and docker-compose.yml were updated to support containerized deployment. All open issues and PRs will closed to start fresh. Please open new issues or PRs as needed.
+Code was refreshed to use uv for dependency management. Dockerfile and docker-compose.yml were updated to support containerized deployment. All open issues and PRs will closed to start fresh. Please open new issues or PRs as needed. We are still in the process of updating the hosting of this API so there may be some downtime till we can get the API moved into the new system. An update will be posted here when that is complete.
 
 #### API Reliability
 A very large number of people use the instance of this API that NASA has set up. If you need a extremely reliable version of this API, you likely want to stand up your own version of the API. You can do that with this code! All information that this API returns is actually just grabbed from the <a href='https://apod.nasa.gov/apod/astropix.html'>Astronomy Photo of the Day Website</a> (APOD).
