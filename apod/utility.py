@@ -148,7 +148,7 @@ def _title(soup):
         if number_of_center_elements == 2:
             center_selection = soup.find_all("center")[0]
             bold_selection = center_selection.find_all("b")[0]
-            title = bold_selection.text.strip(" ")
+            title = bold_selection.text.strip()
             try:
                 title = title.encode("latin1").decode("cp1252")
             except Exception as ex:
@@ -156,7 +156,7 @@ def _title(soup):
         else:
             center_selection = soup.find_all("center")[1]
             bold_selection = center_selection.find_all("b")[0]
-            title = bold_selection.text.strip(" ")
+            title = bold_selection.text.strip()
             try:
                 title = title.encode("latin1").decode("cp1252")
             except Exception as ex:
@@ -189,11 +189,11 @@ def _copyright(soup):
 
         copyright_text = None
         use_next = False
-        for element in soup.findAll("a", text=True):
+        for element in soup.find_all("a", string=True):
             # LOG.debug("TEXT: "+element.text)
 
             if use_next:
-                copyright_text = element.text.strip(" ")
+                copyright_text = element.text.strip()
                 break
 
             if "Copyright" in element.text:
@@ -201,7 +201,7 @@ def _copyright(soup):
                 use_next = True
 
         if not copyright_text:
-            for element in soup.findAll(["b", "a"], text=True):
+            for element in soup.find_all(["b", "a"], string=True):
                 # search text for explicit match
                 if "Copyright" in element.text:
                     LOG.debug("Found Copyright text:" + str(element.text))
@@ -216,7 +216,7 @@ def _copyright(soup):
                         sibling = sibling.next_sibling
 
                     if stuff:
-                        copyright_text = stuff.strip(" ")
+                        copyright_text = stuff.strip()
 
         if copyright_text:
             try:
