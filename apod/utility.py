@@ -108,7 +108,11 @@ def _get_apod_chars(dt, thumbs):
     elif soup.video:
         # its an HTML5 video <video> tag
         media_type = "video"
-        data = BASE + soup.video.source["src"]
+        data = ""
+        source_tag = soup.video.find("source")
+        if source_tag:
+            data = BASE + str(source_tag.get("src"))
+
     else:
         # it is neither image nor video, output empty urls
         media_type = "other"
