@@ -103,8 +103,8 @@ def _get_apod_chars(dt, thumbs):
                 break
     elif soup.iframe:
         # its a video
-        media_type = 'video'
-        data = soup.iframe['src']
+        media_type = "video"
+        data = soup.iframe["src"]
     elif soup.video:
         # its an HTML5 video <video> tag
         media_type = "video"
