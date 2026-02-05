@@ -16,7 +16,7 @@ adapted for AWS Elastic Beanstalk deployment
 """
 
 import logging
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from random import shuffle
 
 from flask import Flask, current_app, jsonify, render_template, request
@@ -166,7 +166,7 @@ def _get_json_for_date(input_date, use_concept_tags, thumbs):
         # fall back to using today's date IF they didn't specify a date
         use_default_today_date = True
         dt = input_date  # None
-        key = datetime.utcnow().date()
+        key = datetime.now(timezone.utc).date()
         key = (
             str(key.year)
             + "y"
