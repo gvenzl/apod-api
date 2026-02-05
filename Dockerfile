@@ -12,7 +12,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies into the system python environment.
-RUN uv sync --frozen
+RUN uv sync --frozen --no-dev
 
 # This makes 'gunicorn' and 'flask' available globally in the container
 ENV PATH="/app/.venv/bin:$PATH"
