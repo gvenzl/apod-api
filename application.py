@@ -16,7 +16,7 @@ adapted for AWS Elastic Beanstalk deployment
 """
 
 import logging
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from random import shuffle
 
 from flask import Flask, current_app, jsonify, render_template, request
@@ -101,6 +101,24 @@ def _validate_date(dt):
         raise ValueError("Date must be between %s and %s." % (begin_str, today_str))
 
 
+def _validate_bools(bool_args: list):
+    """
+    Validates a list of boolean arguments
+
+    :param bool_args: a list of arguments to validate as booleans. These can be either boolean types or strings that can be converted to booleans ("true" or "false", case insensitive).
+    :type bool_args: list
+    :return: True if all arguments are valid booleans or boolean strings, False otherwise.
+    """
+    for bool_arg in bool_args:
+        if isinstance(bool_arg, bool):
+            continue
+        elif isinstance(bool_arg, str) and bool_arg.lower() in ["true", "false"]:
+            continue
+        else:
+            return False
+    return True
+
+
 def _apod_handler(
     dt, use_concept_tags=False, use_default_today_date=False, thumbs=False
 ):
@@ -138,6 +156,7 @@ def _get_json_for_date(input_date, use_concept_tags, thumbs):
     then it defaults to the current date.
     :param input_date:
     :param use_concept_tags:
+    :param thumbs:
     :return:
     """
 
@@ -147,7 +166,7 @@ def _get_json_for_date(input_date, use_concept_tags, thumbs):
         # fall back to using today's date IF they didn't specify a date
         use_default_today_date = True
         dt = input_date  # None
-        key = datetime.utcnow().date()
+        key = datetime.now(timezone.utc).date()
         key = (
             str(key.year)
             + "y"
@@ -345,6 +364,11 @@ def apod():
         end_date = args.get("end_date")
         use_concept_tags = args.get("concept_tags", False)
         thumbs = args.get("thumbs", False)
+
+        if not _validate_bools([use_concept_tags, thumbs]):
+            return _abort(
+                400, "Bad Request: concept_tags and thumbs must be boolean values."
+            )
 
         if not count and not start_date and not end_date:
             return _get_json_for_date(input_date, use_concept_tags, thumbs)
