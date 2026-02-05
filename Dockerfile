@@ -8,11 +8,10 @@ WORKDIR /app
 
 # Copy dependency files first.
 # This allows Docker to cache the installed packages layer.
-# If you change your code but not your dependencies, this step will be skipped (super fast build).
+# If you change your code but not your dependencies, this step will be skipped.
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies into the system python environment.
-# --frozen: Ensures we install exactly what is in uv.lock (reproducible builds)
 RUN uv sync --frozen
 
 # This makes 'gunicorn' and 'flask' available globally in the container
